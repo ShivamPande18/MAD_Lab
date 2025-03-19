@@ -48,4 +48,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean updateTable(String oldName, String newName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, newName);
+        long result = db.update(TABLE_NAME, contentValues, "NAME = ?", new String[] {oldName});
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
 }
