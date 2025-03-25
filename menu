@@ -1,0 +1,386 @@
+//cm
+
+
+package org.geeksforgeeks.demo;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textView;
+    private ConstraintLayout layout;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Link objects with their respective IDs from the XML file
+        textView = findViewById(R.id.textView);
+        layout = findViewById(R.id.main);
+
+        // Register a view for the context menu
+        registerForContextMenu(textView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        // Set menu header title
+        menu.setHeaderTitle("Choose a color");
+        // Add menu items
+        menu.add(0, v.getId(), 0, "Yellow");
+        menu.add(0, v.getId(), 0, "Gray");
+        menu.add(0, v.getId(), 0, "Cyan");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        String title = item.getTitle().toString();
+
+        switch (title) {
+            case "Yellow":
+                layout.setBackgroundColor(Color.YELLOW);
+                break;
+            case "Gray":
+                layout.setBackgroundColor(Color.GRAY);
+                break;
+            case "Cyan":
+                layout.setBackgroundColor(Color.CYAN);
+                break;
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/send"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="send"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/gallery"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:title="gallery"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/call"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="call"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/calculator"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="calculator"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/exit"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="exit"
+        app:showAsAction="ifRoom" />
+</menu>
+
+
+
+package org.geeksforgeeks.demo;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity 
+{
+    // Overriding onCreate Method
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    // Overriding onCreateOptionsMenu Method
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_example, menu);
+        return true;
+    }
+
+    // Overriding onOptionsItemSelected Method
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        
+        
+        switch (item.getItemId()) 
+        {
+            case R.id.send:
+                Toast.makeText(getApplicationContext(), 
+                        "Shows share icon", Toast.LENGTH_SHORT).show();
+                return true;
+                
+            case R.id.gallery:
+                Toast.makeText(getApplicationContext(), 
+                        "Shows image icon", Toast.LENGTH_SHORT).show();
+                return true;
+                
+            case R.id.call:
+                Toast.makeText(getApplicationContext(), 
+                        "Shows call icon", Toast.LENGTH_SHORT).show();
+                return true;
+                
+            case R.id.calculator:
+                Toast.makeText(getApplicationContext(), 
+                        "Calculator menu", Toast.LENGTH_SHORT).show();
+                return true;
+                
+            case R.id.exit:
+                finish();
+                return true;
+                
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
+
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+package org.geeksforgeeks.demo;
+
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize DatePicker from layout
+        DatePicker datePicker = findViewById(R.id.datePicker);
+
+        // Get today's date using Calendar instance
+        Calendar today = Calendar.getInstance();
+
+        // Initialize DatePicker with the current date
+        datePicker.init(
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int month, int day) {
+                    // Display selected date in Toast message
+                    String msg = "You Selected: " + day + "/" + (month + 1) + "/" + year;
+                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        );
+    }
+}
+
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:text="Time is: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:timePickerMode="clock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:text="Time is: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+package org.geeksforgeeks.demo;
+
+import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize TextView and TimePicker from layout
+        TextView textView = findViewById(R.id.textView);
+        TimePicker timePicker = findViewById(R.id.timePicker);
+
+        // Set a listener for when the time changes
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                int hour = hourOfDay;
+                String amPm;
+
+                // Determine AM or PM and adjust hour
+                if (hour == 0) {
+                    hour += 12;
+                    amPm = "AM";
+                } else if (hour == 12) {
+                    amPm = "PM";
+                } else if (hour > 12) {
+                    hour -= 12;
+                    amPm = "PM";
+                } else {
+                    amPm = "AM";
+                }
+
+                // Format hour and minute for display
+                String formattedHour = (hour < 10) ? "0" + hour : String.valueOf(hour);
+                String formattedMinute = (minute < 10) ? "0" + minute : String.valueOf(minute);
+
+                // Display the selected time
+                String msg = "Time is: " + formattedHour + " : " + formattedMinute + " " + amPm;
+                textView.setText(msg);
+                textView.setVisibility(ViewGroup.VISIBLE);
+            }
+        });
+    }
+}
