@@ -384,3 +384,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
+
+
+
+    private static final String DB_PROCESS_CREATE = "create table "
+        + DB_TABLE_PROCESS + "(" + PROCESS_ID
+        + " integer primary key autoincrement, "
+        + PROCESS_DATE + " date);";
+
+
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+String date = sdf.format(new Date());
+
+
+String date = new SimpleDateFormat("yyyy.MM.dd").format(Calendar
+.getInstance().getTime());
+ContentValues cv = new ContentValues();
+cv.put(db.PROCESS_DATE,Date.valueOf(date));
+db.mDB.insert(db.DB_TABLE_PROCESS, null, cv));
+
+
+ContentValues cv = new ContentValues();
+cv.put(db.PROCESS_DATE, new Date().getTime());
+db.mDB.insert(db.DB_TABLE_PROCESS, null, cv));
+
+
+private static final String DB_PROCESS_CREATE = "create table "
+        + DB_TABLE_PROCESS + "(" + PROCESS_ID
+        + " integer primary key autoincrement, "
+        + PROCESS_DATE + " integer);";
